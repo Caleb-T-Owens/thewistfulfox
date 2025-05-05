@@ -1,0 +1,19 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify CodeDeploy
+        uses: aws-actions/aws-code-deploy@v0.1.2
+        with:
+          application-name: TheTesteroniFox
+          deployment-group: testeroni-group
+          deployment-config-name: CodeDeployDefault.OneAtATime
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          region: eu-central-1
