@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify CodeDeploy
-        uses: aws-actions/aws-code-deploy@v0.1.2
+        uses: aws-actions/aws-code-deploy@0.1.2
         with:
           application-name: TheTesteroniFox
           deployment-group: testeroni-group
