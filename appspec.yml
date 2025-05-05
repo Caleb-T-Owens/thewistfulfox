@@ -3,13 +3,20 @@ os: linux
 files:
     - source: /
       destination: /home/ec2-user/thewistfulfox
-      overwrite: true
 hooks:
+    BeforeInstall:
+        - location: scripts/nuke.sh
+          timeout: 300000000000
+          runas: ec2-user
     AfterInstall:
         - location: scripts/install_dependencies.sh
           timeout: 300000000000
           runas: ec2-user
     ApplicationStart:
         - location: scripts/start_server.sh
+          timeout: 300000000000
+          runas: ec2-user
+    ApplicationStop:
+        - location: scripts/stop_server.sh
           timeout: 300000000000
           runas: ec2-user
