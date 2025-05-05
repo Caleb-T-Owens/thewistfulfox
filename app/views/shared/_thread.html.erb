@@ -1,0 +1,39 @@
+<% thread ||= [] %>
+<section>
+  <% if thread.empty? %>
+    <p>No posts yet</p>
+  <% else %>
+    <ul class="article-list flow">
+      <% thread.each do |post| %>
+        <li>
+          <article>
+            <div class="flex gap">
+              <img src="<%= post.user.image_url %>" class="circle medium">
+              <div class="grow flex column left">
+                <span>
+                  <b>
+                    <%= link_to post.user.name, user_path(post.user), class: "link large-text" %>
+                  </b>
+                </span>
+                <span>
+                  <%= post.created_at.strftime("%b %d, %Y") %>
+                </span>
+              </div>
+            </div>
+            <p>
+              <%= post.content %>
+            </p>
+            <% if authenticated? %>
+              <%= button_to (post.liked_by?(Current.user) ? "Unlike #{post.likes_count}" : "Like #{post.likes_count}"),
+                        (post.liked_by?(Current.user) ? unlike_post_path(post) : like_post_path(post)),
+                        class: "fill small",
+                        id: dom_id(post, :like_button) %>
+            <% else %>
+              <button class="fill small" disabled>Like <%= post.likes_count %></button>
+            <% end %>
+          </article>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
