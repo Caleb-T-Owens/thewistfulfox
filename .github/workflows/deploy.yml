@@ -9,11 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify CodeDeploy
-        uses: aws-actions/aws-code-deploy@0.1.2
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          application-name: TheTesteroniFox
-          deployment-group: testeroni-group
-          deployment-config-name: CodeDeployDefault.OneAtATime
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          region: eu-central-1
+          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+          role-session-name: GitHub-Action-Role
+          aws-region: eu-central-1
+      - run: |
+          echo "Deploying branch ${{ env.GITHUB_REF }}"
+          commit_hash=`git rev-parse HEAD` 
+          aws deploy create-deployment --application-name TheTesteroniFox --deployment-group-name testeroni-group --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
