@@ -29,7 +29,7 @@
                         class: "fill small",
                         id: dom_id(post, :like_button) %>
             <% else %>
-              <button class="fill small" disabled>Like <%= post.likes_count %></button>
+              <button class="fill small" disabled>Like <%= post.likes.count %></button>
             <% end %>
           </article>
         </li>
