@@ -38,9 +38,11 @@
         <i>home</i>
         <span>Home</span>
       <% end %>
-      <%= link_to new_post_path do %>
-        <i>add</i>
-        <span>New Post</span>
+      <% if authenticated? %>
+        <%= link_to new_post_path do %>
+          <i>add</i>
+          <span>New Post</span>
+        <% end %>
       <% end %>
     </nav>
     <main class="responsive">
