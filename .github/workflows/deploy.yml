@@ -1,24 +1,24 @@
 name: Deploy to EC2
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v2
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
-          aws-region: eu-central-1
-      - run: |
-          echo "Deploying branch ${{ env.GITHUB_REF }}"
-          commit_hash=`git rev-parse HEAD` 
-          aws deploy create-deployment --application-name TheTesteroniFox --deployment-group-name testeroni-group --github-location repository=Caleb-T-Owens/thewistfulfox,commitId=$commit_hash --ignore-application-stop-failures
+    deploy:
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
+        steps:
+            - uses: actions/checkout@v2
+            - uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+                  role-session-name: GitHub-Action-Role
+                  aws-region: eu-central-1
+            - run: |
+                  echo "Deploying branch ${{ env.GITHUB_REF }}"
+                  commit_hash=`git rev-parse HEAD` 
+                  aws deploy create-deployment --application-name thewistfulfox --deployment-group-name server-group --github-location repository=Caleb-T-Owens/thewistfulfox,commitId=$commit_hash --ignore-application-stop-failures
