@@ -1,5 +1,9 @@
 <section>
   <h1>The Wistful Fox</h1>
   <p>A conversation board</p>
+  <div class="welcome-message">
+    <p>Welcome to our corner of the internet. We're not sure why you're here, but since you are, try not to make it weird. Feel free to lurk in the shadows or contribute to the void - we're not judging (much).</p>
+    <p>Remember: the best conversations are the ones you don't have to participate in.</p>
+  </div>
 </section>
 <%= render "shared/thread", thread: Post.all.order(created_at: :desc) %>

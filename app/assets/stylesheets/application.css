@@ -9,6 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+:root {
+  --scott-purple: #6e5494;
+}
+
 .flex {
     display: flex;
     align-items: center;
@@ -78,4 +82,23 @@
 
 .article-list {
     list-style: none;
+}
+
+.welcome-message {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--surface-variant);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+}
+
+.welcome-message p {
+  margin: 0.5rem 0;
+  font-style: italic;
+  color: var(--on-surface-variant);
+}
+
+.welcome-message p:last-child {
+  margin-top: 1rem;
+  font-weight: 500;
 }
